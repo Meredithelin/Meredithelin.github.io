@@ -1,5 +1,81 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Sat, 03 Jan 2026 06:52:46 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>My first time to write a blog</title><link>https://Meredithelin.github.io/post/My%20first%20time%20to%20write%20a%20blog.html</link><description>![Image](https://github.com/user-attachments/assets/74e60946-665d-456e-956d-a280f5873099)
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Sun, 04 Jan 2026 14:35:01 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>Markdown 使用教程</title><link>https://Meredithelin.github.io/post/Markdown%20-shi-yong-jiao-cheng.html</link><description># &lt;center&gt;&lt;font face='仿宋' color=dark size=20&gt;*Markdown使用教程*&lt;/font&gt;&lt;center&gt;
+## *基本语法*
+### 1.标题
+#一级标题
+##二级标题
+### 2.引用
+&gt;使用&gt;即可
+&gt;&gt;还可以嵌套
+&gt;&gt;&gt;还可以
+### 3.字体
+&gt;快捷键
+ctrl+B加粗
+ctrl+l斜体
+==高亮则在前后各加两个\=\===
+### 4.换行
+- 一句话后加两个空格
+- 两句话之间加一空行
+- 加 ```&lt;br&gt;```
+### 5.  列表
+    1. 无序列表
+    - 列表一
+    - 列表二 
+
+    2.有序
+    3.嵌套TAB即可
+        1. 
+        2. 
+    4.Todolist
+- [x] a
+- [ ] b
+- [ ] c
+### 6.分割线
+***
+---
+_使用---或***即可_
+### 7.删除线
+~~你好~~
+在前后各加两个~~即可
+### 8.下划线
+&lt;u&gt;Meredithelin的个人小站&lt;/u&gt;&lt;br&gt;
+使用```&lt;u&gt;xxx&lt;/u&gt;```即可
+### 9.表格
+|左对齐|居中|右对齐|
+|:---|:---:|---:|
+|a |b|c|
+
+&lt;a href='https://imgchr.com/i/pZatMRg'&gt;&lt;div align=center&gt;&lt;img src='https://s41.ax1x.com/2026/01/04/pZatMRg.png' alt='pZatMRg.png' border='0' width='70%' height='70%'/&gt;&lt;/div&gt;&lt;/a&gt;
+### 10.脚注
+Meredithelin[^1]
+只需要在后面加```[^1]```即可
+[^1]:a student from HITSZ
+### 11.超链接
+[这是Meredithelin的个人小站](https://meredithelin.github.io/)
+使用```[名称](链接)```即可
+### 12.代码
+```c
+#include&lt;stdio.h&gt;
+int main()
+{
+    printf('I am Meredithelin.');
+    return 0;
+}
+```
+在代码的前一行使用\`\`\`加语言，后一行使用\`\`\`
+若是在一行内则直接用两个反引号即可
+### 13.图片
+要将图片上传，否则别人看不到
+### 14.Latex
+$f(x)=ax+b$
+详情见Latex语法
+### 15.注意事项
+- 符号前加\可以显示符号本身
+- \`\`\` \`\`\`之间可以文本方式显示
+
+### 16.html语法
+e.g.```&lt;center&gt;&lt;/center&gt;```
+```&lt;font face= color= size=&gt;```。</description><guid isPermaLink="true">https://Meredithelin.github.io/post/Markdown%20-shi-yong-jiao-cheng.html</guid><pubDate>Sun, 04 Jan 2026 14:34:30 +0000</pubDate></item><item><title>My first time to write a blog</title><link>https://Meredithelin.github.io/post/My%20first%20time%20to%20write%20a%20blog.html</link><description>![Image](https://github.com/user-attachments/assets/74e60946-665d-456e-956d-a280f5873099)
 
 # My
 ## First time 
