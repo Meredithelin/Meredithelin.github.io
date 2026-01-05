@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Sun, 04 Jan 2026 14:40:01 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>Markdown 使用教程</title><link>https://Meredithelin.github.io/post/Markdown%20-shi-yong-jiao-cheng.html</link><description># &lt;center&gt;&lt;font face='仿宋' color=dark size=20&gt;*Markdown使用教程*&lt;/font&gt;&lt;center&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Mon, 05 Jan 2026 06:46:36 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>HITSZ期末考题</title><link>https://Meredithelin.github.io/post/HITSZ-qi-mo-kao-ti.html</link><description># &lt;center&gt;数学分析&lt;/center&gt;
+&lt;font size=5 face=楷体&gt;$$
+y''\left( x+y'^2 \right) =y'\text{在}y\left( 1 \right) =y'\left( 1 \right) =1\text{时的特解}
+$$ 
+---
+## 1.第一步
+&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;另y'=u,则原方程变为
+$$
+u'\left( x+u^2 \right) =u
+$$
+## 2.第二步
+&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;想分离变量,但发现x与u无法完全分离。</description><guid isPermaLink="true">https://Meredithelin.github.io/post/HITSZ-qi-mo-kao-ti.html</guid><pubDate>Mon, 05 Jan 2026 06:46:05 +0000</pubDate></item><item><title>Markdown 使用教程</title><link>https://Meredithelin.github.io/post/Markdown%20-shi-yong-jiao-cheng.html</link><description># &lt;center&gt;&lt;font face='仿宋' color=dark size=20&gt;*Markdown使用教程*&lt;/font&gt;&lt;center&gt;
 ## *基本语法*
 ### 1.标题
 #一级标题
