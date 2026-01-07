@@ -2,5 +2,8 @@
     "title":"Meredithelin的个人小站",
     "subTitle":"我是Meredithelin,分享好玩事情的博主",
     "avatarUrl":"https://avatars.githubusercontent.com/u/229789701?v=4",
+    "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekBSZ.js'></script>",
+    "script":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script>",
+    "script":"<script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>",
     "GMEEK_VERSION":"last"
 }
