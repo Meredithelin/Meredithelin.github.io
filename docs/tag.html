@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="dark" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -37,7 +37,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-data);
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.25;
     min-width: 200px;
     max-width: 900px;
     margin: 20px auto;
@@ -72,6 +72,50 @@ body::after {
 }
 #footer a { color: var(--neon-cyan); text-decoration: none; }
 #footer a:hover { text-decoration: underline; }
+svg { fill: currentColor; }
+.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
+@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+
+/* ===== Animated CRT Scanline ===== */
+@keyframes scanline-move {
+    0% { top: -10px; }
+    100% { top: 100vh; }
+}
+
+/* ===== Neon Glow Keyframes ===== */
+@keyframes neon-text-pulse {
+    0%, 100% { text-shadow: none; }
+    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+}
+
+/* ===== Page Load Animations ===== */
+#header { animation: fade-in-down 0.6s ease-out both; }
+#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
+#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
+
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+@media (max-width: 600px) {
+    body { padding: 8px; }
+}
+</style>
+
+<style>
 .tagTitle {
     margin: auto 0;
     font-size: 40px;
@@ -178,55 +222,9 @@ body::after {
     text-transform: uppercase;
 }
 .border { border: 1px solid var(--line-color) !important; }
-.AnimatedEllipsis::after {
-    content: '...';
-    animation: ellipsis 1.5s infinite;
-}
-@keyframes ellipsis {
-    0% { content: '.'; }
-    33% { content: '..'; }
-    66% { content: '...'; }
-}
-svg { fill: currentColor; }
 @media (max-width: 600px) {
-    body { padding: 8px; }
     .tagTitle { display: none; }
     .LabelTime { display: none; }
-}
-
-/* ===== Animated CRT Scanline ===== */
-@keyframes scanline-move {
-    0% { top: -10px; }
-    100% { top: 100vh; }
-}
-
-/* ===== Neon Glow Keyframes ===== */
-@keyframes neon-text-pulse {
-    0%, 100% { text-shadow: none; }
-    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
-}
-
-/* ===== Page Load Animations ===== */
-#header { animation: fade-in-down 0.6s ease-out both; }
-#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
-#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
-
-@keyframes fade-in-down {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== Reduced Motion ===== */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
 }
 </style>
 
@@ -237,21 +235,19 @@ svg { fill: currentColor; }
 <div class="title-right">
     <div class="subnav-search">
         <input type="search" class="form-control subnav-search-input float-left" aria-label="Search site" value="" style="height:32px;">
-        <button class="btn float-left" type="submit" onclick="javascript:searchShow()">搜索</button>
+        <button class="btn float-left" type="submit" onclick="javascript:searchShow()"></button>
         <svg class="subnav-search-icon octicon octicon-search" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
             <path id="searchSVG" fill-rule="evenodd"></path>
         </svg>
     </div>
-    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathHome" fill-rule="evenodd"></path>
-        </svg>
+    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="">
+        <svg class="octicon" width="16" height="16"><path id="pathHome" fill-rule="evenodd"></path></svg>
     </a>
-    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="切换主题">
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
+    
+    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="">
+        <svg class="octicon" width="16" height="16"><path id="themeSwitch" fill-rule="evenodd"></path></svg>
     </a>
+    
 </div>
 </div>
     <div id="content">
@@ -462,7 +458,6 @@ function searchShow(){
     }
     else{document.getElementsByClassName("notFind")[0].style.display='none';}
 }
-
 </script>
 
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="dark" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -169,7 +169,7 @@ e.g.```<center></center>```
 <meta property="og:url" content="https://Meredithelin.github.io/post/Markdown%20-shi-yong-jiao-cheng.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/229789701?v=4">
 <title>Markdown 使用教程</title>
-<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+<link href="https://cdn.bootcss.com/highlight.js/11.5.1/styles/default.min.css" rel="stylesheet">
 
 
 </head>
@@ -231,6 +231,50 @@ body::after {
 }
 #footer a { color: var(--neon-cyan); text-decoration: none; }
 #footer a:hover { text-decoration: underline; }
+svg { fill: currentColor; }
+.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
+@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+
+/* ===== Animated CRT Scanline ===== */
+@keyframes scanline-move {
+    0% { top: -10px; }
+    100% { top: 100vh; }
+}
+
+/* ===== Neon Glow Keyframes ===== */
+@keyframes neon-text-pulse {
+    0%, 100% { text-shadow: none; }
+    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+}
+
+/* ===== Page Load Animations ===== */
+#header { animation: fade-in-down 0.6s ease-out both; }
+#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
+#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
+
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+@media (max-width: 600px) {
+    body { padding: 8px; }
+}
+</style>
+
+<style>
 .postTitle {
     margin: auto 0;
     font-size: 40px;
@@ -345,66 +389,13 @@ body::after {
 #cmButton { height: 48px; margin-top: 48px; }
 #comments { margin-top: 64px; }
 .g-emoji { font-size: 24px; }
-svg { fill: currentColor; }
-.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
-@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
-.copy-feedback { display: none; position: absolute; top: 10px; right: 50px; color: #fff; background-color: var(--neon-cyan); border-radius: 3px; padding: 5px 8px; font-size: 12px; font-family: var(--font-data); }
-.snippet-clipboard-content { position: relative; }
-.clipboard-container { position: absolute; right: 0; top: 0; }
-.ClipboardButton { background: var(--bg-panel); border: 1px solid var(--line-color); color: var(--text-muted); cursor: pointer; border-radius: 3px; padding: 4px; }
-.ClipboardButton:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
-.d-none { display: none !important; }
-.m-2 { margin: 8px; }
-.p-0 { padding: 0; }
-.position-relative { position: relative; }
-.position-absolute { position: absolute; }
-.right-0 { right: 0; }
-.top-0 { top: 0; }
-.overflow-auto { overflow: auto; }
-.float-left { float: left; }
-.color-fg-success { color: #2ea043; }
-.MathJax { color: var(--text-main) !important; }
+.postTitle { font-size: 40px; }
 @media (max-width: 600px) {
-    body { padding: 8px; }
     .postTitle { font-size: 24px; }
 }
-
-/* ===== Animated CRT Scanline ===== */
-@keyframes scanline-move {
-    0% { top: -10px; }
-    100% { top: 100vh; }
-}
-
-/* ===== Neon Glow Keyframes ===== */
-@keyframes neon-text-pulse {
-    0%, 100% { text-shadow: none; }
-    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
-}
-
-/* ===== Page Load Animations ===== */
-#header { animation: fade-in-down 0.6s ease-out both; }
-#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
-#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
-
-@keyframes fade-in-down {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== Reduced Motion ===== */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
+.copy-feedback { position:absolute; top:2px; right:55px; color:var(--neon-cyan); font-size:12px; opacity:0; transition:opacity 0.3s; }
+.copy-feedback.show { opacity:1; }
 </style>
-
 
 
 
@@ -412,25 +403,15 @@ svg { fill: currentColor; }
     <div id="header">
 <h1 class="postTitle">Markdown 使用教程</h1>
 <div class="title-right">
-    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathHome" fill-rule="evenodd"></path>
-        </svg>
+    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="">
+        <svg class="octicon" width="16" height="16"><path id="pathHome" fill-rule="evenodd"></path></svg>
     </a>
     
-    <a href="https://github.com/Meredithelin/Meredithelin.github.io/issues/4" target="_blank" class="btn btn-invisible circle" title="Issue">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathIssue" fill-rule="evenodd"></path>
-        </svg>
+    
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="">
+        <svg class="octicon" width="16" height="16"><path id="themeSwitch" fill-rule="evenodd"></path></svg>
     </a>
     
-
-    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-
 </div>
 </div>
     <div id="content">
@@ -507,7 +488,7 @@ ctrl+l斜体<br>
 </table></markdown-accessiblity-table>
 <p><a href="https://imgchr.com/i/pZatMRg" rel="nofollow"></a></p><div align="center"><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/644ded9344f356a10bee0e310ee694c807aa2dd96bc7f2c0d143ef8f43cd1358/68747470733a2f2f7334312e617831782e636f6d2f323032362f30312f30342f705a61744d52672e706e67"><img src="https://camo.githubusercontent.com/644ded9344f356a10bee0e310ee694c807aa2dd96bc7f2c0d143ef8f43cd1358/68747470733a2f2f7334312e617831782e636f6d2f323032362f30312f30342f705a61744d52672e706e67" alt="pZatMRg.png" width="70%" height="70%" data-canonical-src="https://s41.ax1x.com/2026/01/04/pZatMRg.png" style="max-width: 100%;"></a></div><p></p>
 <h3>10.脚注</h3>
-<p>Meredithelin<sup><a href="#user-content-fn-1-035bc4c3da016caf8358875fbbcc9c01" id="user-content-fnref-1-035bc4c3da016caf8358875fbbcc9c01" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup><br>
+<p>Meredithelin<sup><a href="#user-content-fn-1-70484e584b7a7a1b9fd39adc3ec843a9" id="user-content-fnref-1-70484e584b7a7a1b9fd39adc3ec843a9" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup><br>
 只需要在后面加<code class="notranslate">[^1]</code>即可</p>
 <h3>11.超链接</h3>
 <p><a href="https://meredithelin.github.io/" rel="nofollow">这是Meredithelin的个人小站</a><br>
@@ -536,15 +517,12 @@ ctrl+l斜体<br>
 <code class="notranslate">&lt;font face= color= size=&gt;</code></p>
 <section data-footnotes="" class="footnotes"><h2 id="footnote-label" class="sr-only">Footnotes</h2>
 <ol>
-<li id="user-content-fn-1-035bc4c3da016caf8358875fbbcc9c01">
-<p>a student from HITSZ <a href="#user-content-fnref-1-035bc4c3da016caf8358875fbbcc9c01" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+<li id="user-content-fn-1-70484e584b7a7a1b9fd39adc3ec843a9">
+<p>a student from HITSZ <a href="#user-content-fnref-1-70484e584b7a7a1b9fd39adc3ec843a9" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
 </li>
 </ol>
 </section></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
-
-<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
-<div class="comments" id="comments"></div>
 
 </div>
     <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Meredithelin.github.io">Meredithelin的个人小站</a></div>
@@ -598,113 +576,36 @@ console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
-document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
 
-
-
-function openComments(){
-    cm=document.getElementById("comments");
-    cmButton=document.getElementById("cmButton");
-    cmButton.disabled=true;
-    cmButton.innerHTML="loading";
-    span=document.createElement("span");
-    span.setAttribute("class","AnimatedEllipsis");
-    cmButton.appendChild(span);
-
-    script=document.createElement("script");
-    script.setAttribute("src","https://utteranc.es/client.js");
-    script.setAttribute("repo","Meredithelin/Meredithelin.github.io");
-    script.setAttribute("issue-term","title");
-    
-    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
-    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
-    else{script.setAttribute("theme","preferred-color-scheme");}
-    
-    script.setAttribute("crossorigin","anonymous");
-    script.setAttribute("async","");
-    cm.appendChild(script);
-
-    int=self.setInterval("iFrameLoading()",200);
-}
-
-function iFrameLoading(){
-    var utterances=document.getElementsByClassName('utterances');
-    if(utterances.length==1){
-        if(utterances[0].style.height!=""){
-            utterancesLoad=1;
-            int=window.clearInterval(int);
-            document.getElementById("cmButton").style.display="none";
-            console.log("utterances Load OK");
-        }
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const createClipboardHTML = (codeContent, additionalClasses = '') => `
-        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
-        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
-            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
-                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
-                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
-            </clipboard-copy>
-            <div class="copy-feedback">Copied!</div>
-        </div>
-    `;
-
-    const handleCodeElements = (selector = '') => {
-        document.querySelectorAll(selector).forEach(codeElement => {
-            const codeContent = codeElement.innerHTML;
-            const newStructure = document.createElement('div');
-            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
-            newStructure.innerHTML = createClipboardHTML(codeContent);
-
-            const parentElement = codeElement.parentElement;
-            if (selector.includes('highlight')) {
-                parentElement.insertBefore(newStructure, codeElement.nextSibling);
-                parentElement.removeChild(codeElement);
-            } else {
-                parentElement.parentElement.replaceChild(newStructure, parentElement);
-            }
-        });
-    };
-
-    handleCodeElements('pre.notranslate > code.notranslate');
-    handleCodeElements('div.highlight > pre.notranslate');
-
-    let currentFeedback = null;
-    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
-        copyButton.addEventListener('click', () => {
-            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = codeContent;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
-
-            const copyIcon = copyButton.querySelector('.octicon-copy');
-            const checkIcon = copyButton.querySelector('.octicon-check');
-            const copyFeedback = copyButton.nextElementSibling;
-
-            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
-            currentFeedback = copyFeedback;
-
-            copyIcon.classList.add('d-none');
-            checkIcon.classList.remove('d-none');
-            copyFeedback.style.display = 'block';
-            copyButton.style.borderColor = 'var(--color-success-fg)';
-
-            setTimeout(() => {
-                copyIcon.classList.remove('d-none');
-                checkIcon.classList.add('d-none');
-                copyFeedback.style.display = 'none';
-                copyButton.style.borderColor = '';
-            }, 2000);
-        });
-    });
-});
 
 </script>
-<script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="https://cdn.bootcss.com/highlight.js/11.5.1/highlight.min.js"></script>
+<script>document.querySelectorAll('pre code').forEach((el) => { hljs.highlightElement(el); });</script>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre) {
+    var button = document.createElement('button');
+    button.className = 'btn';
+    button.style.cssText = 'position:absolute;top:2px;right:2px;';
+    var svg = '<svg class="octicon" width="16" height="16"><path id="" fill-rule="evenodd"></path></svg>';
+    button.innerHTML = svg;
+    button.querySelector('path').setAttribute('d', IconList["copy"]);
+    var feedback = document.createElement('span');
+    feedback.className = 'copy-feedback';
+    feedback.textContent = 'Copied!';
+    pre.style.position = 'relative';
+    pre.appendChild(button);
+    pre.appendChild(feedback);
+    button.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var text = code ? code.textContent : pre.textContent;
+        navigator.clipboard.writeText(text);
+        feedback.classList.add('show');
+        setTimeout(function() { feedback.classList.remove('show'); }, 2000);
+    });
+});
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </html>

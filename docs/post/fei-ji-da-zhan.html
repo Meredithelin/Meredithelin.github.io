@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="dark" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -79,6 +79,50 @@ body::after {
 }
 #footer a { color: var(--neon-cyan); text-decoration: none; }
 #footer a:hover { text-decoration: underline; }
+svg { fill: currentColor; }
+.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
+@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+
+/* ===== Animated CRT Scanline ===== */
+@keyframes scanline-move {
+    0% { top: -10px; }
+    100% { top: 100vh; }
+}
+
+/* ===== Neon Glow Keyframes ===== */
+@keyframes neon-text-pulse {
+    0%, 100% { text-shadow: none; }
+    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+}
+
+/* ===== Page Load Animations ===== */
+#header { animation: fade-in-down 0.6s ease-out both; }
+#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
+#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
+
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+@media (max-width: 600px) {
+    body { padding: 8px; }
+}
+</style>
+
+<style>
 .postTitle {
     margin: auto 0;
     font-size: 40px;
@@ -193,50 +237,13 @@ body::after {
 #cmButton { height: 48px; margin-top: 48px; }
 #comments { margin-top: 64px; }
 .g-emoji { font-size: 24px; }
-svg { fill: currentColor; }
-.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
-@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+.postTitle { font-size: 40px; }
 @media (max-width: 600px) {
-    body { padding: 8px; }
     .postTitle { font-size: 24px; }
 }
-
-/* ===== Animated CRT Scanline ===== */
-@keyframes scanline-move {
-    0% { top: -10px; }
-    100% { top: 100vh; }
-}
-
-/* ===== Neon Glow Keyframes ===== */
-@keyframes neon-text-pulse {
-    0%, 100% { text-shadow: none; }
-    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
-}
-
-/* ===== Page Load Animations ===== */
-#header { animation: fade-in-down 0.6s ease-out both; }
-#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
-#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
-
-@keyframes fade-in-down {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== Reduced Motion ===== */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
+.copy-feedback { position:absolute; top:2px; right:55px; color:var(--neon-cyan); font-size:12px; opacity:0; transition:opacity 0.3s; }
+.copy-feedback.show { opacity:1; }
 </style>
-
 
 
 
@@ -244,33 +251,20 @@ svg { fill: currentColor; }
     <div id="header">
 <h1 class="postTitle">飞机大战</h1>
 <div class="title-right">
-    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathHome" fill-rule="evenodd"></path>
-        </svg>
+    <a href="https://Meredithelin.github.io" id="buttonHome" class="btn btn-invisible circle" title="">
+        <svg class="octicon" width="16" height="16"><path id="pathHome" fill-rule="evenodd"></path></svg>
     </a>
     
-    <a href="https://github.com/Meredithelin/Meredithelin.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
-        <svg class="octicon" width="16" height="16">
-            <path id="pathIssue" fill-rule="evenodd"></path>
-        </svg>
+    
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="">
+        <svg class="octicon" width="16" height="16"><path id="themeSwitch" fill-rule="evenodd"></path></svg>
     </a>
     
-
-    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-
 </div>
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><p><a href="https://flywar.netlify.app/" rel="nofollow">https://flywar.netlify.app/</a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
-
-<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
-<div class="comments" id="comments"></div>
 
 </div>
     <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Meredithelin.github.io">Meredithelin的个人小站</a></div>
@@ -324,50 +318,33 @@ console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 
 
 <script>
 document.getElementById("pathHome").setAttribute("d",IconList["home"]);
-document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
-
-
-
-function openComments(){
-    cm=document.getElementById("comments");
-    cmButton=document.getElementById("cmButton");
-    cmButton.disabled=true;
-    cmButton.innerHTML="loading";
-    span=document.createElement("span");
-    span.setAttribute("class","AnimatedEllipsis");
-    cmButton.appendChild(span);
-
-    script=document.createElement("script");
-    script.setAttribute("src","https://utteranc.es/client.js");
-    script.setAttribute("repo","Meredithelin/Meredithelin.github.io");
-    script.setAttribute("issue-term","title");
-    
-    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
-    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
-    else{script.setAttribute("theme","preferred-color-scheme");}
-    
-    script.setAttribute("crossorigin","anonymous");
-    script.setAttribute("async","");
-    cm.appendChild(script);
-
-    int=self.setInterval("iFrameLoading()",200);
-}
-
-function iFrameLoading(){
-    var utterances=document.getElementsByClassName('utterances');
-    if(utterances.length==1){
-        if(utterances[0].style.height!=""){
-            utterancesLoad=1;
-            int=window.clearInterval(int);
-            document.getElementById("cmButton").style.display="none";
-            console.log("utterances Load OK");
-        }
-    }
-}
-
 
 
 </script>
-<script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+
+<script>
+document.querySelectorAll('pre').forEach(function(pre) {
+    var button = document.createElement('button');
+    button.className = 'btn';
+    button.style.cssText = 'position:absolute;top:2px;right:2px;';
+    var svg = '<svg class="octicon" width="16" height="16"><path id="" fill-rule="evenodd"></path></svg>';
+    button.innerHTML = svg;
+    button.querySelector('path').setAttribute('d', IconList["copy"]);
+    var feedback = document.createElement('span');
+    feedback.className = 'copy-feedback';
+    feedback.textContent = 'Copied!';
+    pre.style.position = 'relative';
+    pre.appendChild(button);
+    pre.appendChild(feedback);
+    button.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var text = code ? code.textContent : pre.textContent;
+        navigator.clipboard.writeText(text);
+        feedback.classList.add('show');
+        setTimeout(function() { feedback.classList.remove('show'); }, 2000);
+    });
+});
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
 
 </html>
