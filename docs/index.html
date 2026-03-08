@@ -1,220 +1,1060 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
-<head>
+<html data-color-mode="dark" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+  <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekBSZ.js'></script>
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/229789701?v=4"><script>
-        let theme = localStorage.getItem("meek_theme") || "light";
+    
+    <meta name="description" content="我是Meredithelin,分享好玩事情的博主">
+    <meta property="og:title" content="Meredithelin的个人小站">
+    <meta property="og:description" content="我是Meredithelin,分享好玩事情的博主">
+    <meta property="og:type" content="blog">
+    <meta property="og:url" content="https://Meredithelin.github.io">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/229789701?v=4">
+    <title>Meredithelin的个人小站</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/229789701?v=4">
+
+    <script>
+        let theme = localStorage.getItem("meek_theme") || "dark";
         document.documentElement.setAttribute("data-color-mode", theme);
+        function modeSwitch() {
+            let currentMode = document.documentElement.getAttribute('data-color-mode');
+            let newMode = currentMode === "light" ? "dark" : "light";
+            localStorage.setItem("meek_theme", newMode);
+            document.documentElement.setAttribute("data-color-mode", newMode);
+        }
     </script>
-<meta name="description" content="我是Meredithelin,分享好玩事情的博主">
-<meta property="og:title" content="Meredithelin的个人小站">
-<meta property="og:description" content="我是Meredithelin,分享好玩事情的博主">
-<meta property="og:type" content="blog">
-<meta property="og:url" content="https://Meredithelin.github.io">
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/229789701?v=4">
-<title>Meredithelin的个人小站</title>
 
-</head>
-<style>
-body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
-#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
-#footer {margin-top:64px; text-align: center;font-size: small;}
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap");
 
-</style>
+      :root {
+        --bg-void: #030304;
+        --bg-panel: #0a0a0c;
+        --neon-red: #ff003c;
+        --neon-red-dim: rgba(255, 0, 60, 0.2);
+        --neon-purple: #8a2be2;
+        --neon-purple-dim: rgba(138, 43, 226, 0.2);
+        --neon-cyan: #00f0ff;
+        --text-main: #ffffff;
+        --text-muted: #888899;
+        --text-dark: #333344;
+        --line-color: rgba(255, 255, 255, 0.15);
 
-<style>
-.avatar {transition: 0.8s;width:64px;height:64px;object-fit: cover;}
-.avatar:hover{transform: scale(1.15) rotate(360deg);}
-.title-left a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-weight: bold;font-family:Monaco;margin-left:8px;}
-.title-right{display:flex;margin:auto 0 0 auto;}
-.title-right button{margin-right:8px;padding:16px;}
-.title-right .circle{padding: 14px 16px;}
+        --font-display: "Orbitron", sans-serif;
+        --font-data: "Share Tech Mono", monospace;
 
-.SideNav{min-width: 360px;}
-.SideNav-icon{margin-right: 16px}
-.SideNav-item .Label{color: #fff;margin-left:4px;}
-.d-flex{min-width:0;}
-.listTitle{overflow:hidden;white-space:nowrap;text-overflow: ellipsis;max-width: 100%;}
-.listLabels{white-space:nowrap;display:flex;}
-.listLabels object{max-height:16px;max-width:24px;}
+        --gap-lg: 2rem;
+        --gap-md: 1rem;
+        --gap-sm: 0.5rem;
+        --cut-corner: polygon(
+          15px 0,
+          100% 0,
+          100% calc(100% - 15px),
+          calc(100% - 15px) 100%,
+          0 100%,
+          0 15px
+        );
+        --cut-corner-reverse: polygon(
+          0 0,
+          calc(100% - 15px) 0,
+          100% 15px,
+          100% 100%,
+          15px 100%,
+          0 calc(100% - 15px)
+        );
+      }
 
-@media (max-width: 600px) {
-    body {padding: 8px;}
-    .avatar {width:40px;height:40px;}
-    .blogTitle{display:none;}
-    #buttonRSS{display:none;}
-    .LabelTime{display:none;}
-}
-</style>
+      html[data-color-mode="light"] {
+        --bg-void: #eaeaee;
+        --bg-panel: #ffffff;
+        --neon-red: #d32f2f;
+        --neon-red-dim: rgba(211, 47, 47, 0.2);
+        --neon-purple: #512da8;
+        --neon-purple-dim: rgba(81, 45, 168, 0.2);
+        --neon-cyan: #00838f;
+        --text-main: #111122;
+        --text-muted: #555566;
+        --text-dark: #888899;
+        --line-color: rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-void);
+        color: var(--text-main);
+        font-family: var(--font-data);
+        height: 100vh;
+        overflow: hidden;
+        background-image:
+          linear-gradient(var(--line-color) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: center center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(transparent, rgba(0,240,255,0.08), transparent);
+        z-index: 9998;
+        pointer-events: none;
+        animation: scanline-move 6s linear infinite;
+      }
+      @keyframes scanline-move {
+        0% { top: -10px; }
+        100% { top: 100vh; }
+      }
+
+      body::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background:
+          linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.06),
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 0, 255, 0.06)
+          );
+        z-index: 2;
+        background-size:
+          100% 2px,
+          3px 100%;
+        pointer-events: none;
+      }
+
+      .system-wrapper {
+        width: 100%;
+        max-width: 1800px;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 320px 1fr 400px;
+        gap: 2px;
+        background: var(--line-color);
+        position: relative;
+        z-index: 10;
+      }
+
+      .panel {
+        background: var(--bg-void);
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .glitch-text {
+        position: relative;
+        color: var(--text-main);
+        font-family: var(--font-display);
+        font-weight: 900;
+      }
+      .glitch-text::before,
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      }
+      .glitch-text::before {
+        left: 2px;
+        text-shadow: -1px 0 var(--neon-red);
+        animation: glitch-anim 3s infinite linear alternate-reverse;
+      }
+      .glitch-text::after {
+        left: -2px;
+        text-shadow: -1px 0 var(--neon-cyan);
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        animation: glitch-anim 2.5s infinite linear alternate-reverse;
+      }
+
+      @keyframes glitch-anim {
+        0% { clip-path: inset(20% 0 80% 0); }
+        20% { clip-path: inset(60% 0 10% 0); }
+        40% { clip-path: inset(40% 0 50% 0); }
+        60% { clip-path: inset(80% 0 5% 0); }
+        80% { clip-path: inset(10% 0 70% 0); }
+        100% { clip-path: inset(30% 0 50% 0); }
+      }
+
+      .panel-left {
+        border-right: 1px solid var(--neon-red-dim);
+      }
+
+      .brand-header {
+        margin-bottom: var(--gap-lg);
+        position: relative;
+      }
+
+      .brand-header h1 {
+        font-size: 2.5rem;
+        line-height: 0.9;
+        letter-spacing: -2px;
+        margin-bottom: 5px;
+      }
+
+      .brand-header .sub-brand {
+        font-size: 0.7rem;
+        color: var(--neon-red);
+        letter-spacing: 4px;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0;
+        animation: typing 3s steps(35, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
+        border-right: 2px solid var(--neon-red);
+      }
 
 
+      .nav-menu {
+        list-style: none;
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
-<body>
-    <div id="header">
-<div class="title-left">
-    <img src="https://avatars.githubusercontent.com/u/229789701?v=4" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">Meredithelin的个人小站</a></div>
-<div class="title-right">
-    <a href="https://Meredithelin.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
-        <svg class="octicon" width="16" height="16" >
-            <path id="pathSearch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    
-    
-    <a href="https://Meredithelin.github.io/rss.xml" target="_blank" id="buttonRSS" class="btn btn-invisible circle" title="RSS">
-        <svg class="octicon" width="16" height="16" >
-            <path id="pathRSS" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="切换主题">
-        <svg class="octicon" width="16" height="16" >
-            <path id="themeSwitch" fill-rule="evenodd"></path>
-        </svg>
-    </a>
-</div>
-</div>
-    <div id="content">
-<div style="margin-bottom: 16px;">我是Meredithelin,分享好玩事情的博主</div>
-<nav class="SideNav border">
-<a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/fei-ji-da-zhan.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">飞机大战</span>
+      .nav-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        padding: 10px 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-muted);
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--text-main);
+      }
+      .nav-item:hover {
+        transform: translateX(8px);
+        text-shadow: 0 0 10px var(--neon-cyan);
+      }
+
+      .nav-num {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        color: var(--neon-purple);
+        width: 30px;
+        font-weight: 700;
+      }
+
+      .nav-label {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        position: relative;
+      }
+
+      .nav-item.active .nav-label::after {
+        content: "";
+        position: absolute;
+        left: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 100%;
+        background: var(--neon-red);
+        box-shadow: 0 0 10px var(--neon-red);
+      }
+
+      .sys-status {
+        margin-top: auto;
+        border: 1px solid var(--line-color);
+        padding: 15px;
+        background: repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 4px,
+          rgba(255, 255, 255, 0.03) 4px,
+          rgba(255, 255, 255, 0.03) 8px
+        );
+        animation: neon-border-pulse 3s ease-in-out infinite;
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+      }
+      .status-row:last-child {
+        margin-bottom: 0;
+      }
+      .status-value {
+        color: var(--neon-cyan);
+      }
+
+      .panel-center {
+        padding: 0;
+        position: relative;
+      }
+
+      .panel-center::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        border: 1px solid var(--line-color);
+        pointer-events: none;
+        clip-path: var(--cut-corner);
+        z-index: 0;
+      }
+
+      .feed-container {
+        height: 100%;
+        overflow-y: auto;
+        padding: 50px 60px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feed-container::-webkit-scrollbar {
+        width: 4px;
+      }
+      .feed-container::-webkit-scrollbar-track {
+        background: var(--bg-void);
+        border-left: 1px solid var(--line-color);
+      }
+      .feed-container::-webkit-scrollbar-thumb {
+        background: var(--neon-red);
+      }
+
+      .feed-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--line-color);
+        padding-bottom: 10px;
+      }
+
+      .feed-title {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        color: var(--neon-red);
+        letter-spacing: 4px;
+      }
+
+      .feed-title {
+        animation: neon-text-pulse 4s ease-in-out infinite;
+      }
+      .feed-meta {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+      }
+
+      .data-packet {
+        background: rgba(10, 10, 12, 0.6);
+        border: 1px solid var(--line-color);
+        margin-bottom: 40px;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        clip-path: var(--cut-corner-reverse);
+      }
+
+      html[data-color-mode="light"] .data-packet {
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .data-packet:hover {
+        border-color: var(--neon-purple);
+        box-shadow: inset 0 0 30px var(--neon-purple-dim), 0 0 20px var(--neon-purple-dim);
+        transform: translateY(-3px) scale(1.005);
+      }
+
+      .data-packet::before,
+      .data-packet::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--neon-red);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .data-packet::before {
+        top: 0;
+        left: 0;
+        border-right: none;
+        border-bottom: none;
+      }
+      .data-packet::after {
+        bottom: 0;
+        right: 0;
+        border-left: none;
+        border-top: none;
+      }
+      .data-packet:hover::before,
+      .data-packet:hover::after {
+        opacity: 1;
+      }
+
+      .packet-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--line-color);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .packet-id {
+        color: var(--neon-cyan);
+        font-weight: bold;
+        animation: neon-text-pulse 3s ease-in-out infinite;
+      }
+      .packet-body {
+        padding: 25px 20px;
+      }
+
+      .packet-title {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        line-height: 1.1;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+        color: var(--text-main);
+      }
+
+      .packet-excerpt {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #aaaabb;
+        text-transform: none;
+        margin-bottom: 20px;
+      }
+
+      html[data-color-mode="light"] .packet-excerpt {
+        color: var(--text-muted);
+      }
+
+      .packet-footer {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 0 20px 20px;
+      }
+
+      .tag {
+        font-size: 0.65rem;
+        padding: 4px 8px;
+        border: 1px solid var(--neon-purple);
+        color: var(--neon-purple);
+        border-radius: 2px;
+        background: var(--neon-purple-dim);
+        transition: all 0.3s ease;
+      }
+      .tag:hover {
+        box-shadow: 0 0 8px var(--neon-purple);
+        transform: scale(1.1);
+      }
+
+      .btn-read {
+        margin-left: auto;
+        background: transparent;
+        color: var(--neon-red);
+        border: 1px solid var(--neon-red);
+        padding: 8px 15px;
+        font-family: var(--font-data);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-read {
+        animation: btn-glow-pulse 2s ease-in-out infinite;
+      }
+      .btn-read:hover {
+        background: var(--neon-red);
+        color: #000;
+        box-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red-dim);
+        transform: scale(1.05);
+        animation: none;
+      }
+
+      html[data-color-mode="light"] .btn-read:hover {
+        color: #fff;
+      }
+
+      .panel-right {
+        border-left: 1px solid var(--neon-purple-dim);
+        background: var(--bg-void);
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .telemetry-header {
+        padding: 30px 30px 15px;
+        border-bottom: 1px solid var(--line-color);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .telemetry-title {
+        color: var(--neon-purple);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+      }
+
+      .schematic-display {
+        flex-grow: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      .schematic-svg {
+        width: 100%;
+        height: 100%;
+        max-width: 300px;
+      }
+
+      .spin-slow {
+        animation: spin 20s linear infinite;
+        transform-origin: center;
+      }
+      .spin-reverse {
+        animation: spin 15s linear infinite reverse;
+        transform-origin: center;
+      }
+      .pulse-op {
+        animation: pulse 2s ease-in-out infinite;
+      }
+      .dash-move {
+        stroke-dasharray: 4 4;
+        animation: dash 20s linear infinite;
+      }
+
+      @keyframes spin {
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+      @keyframes dash {
+        to { stroke-dashoffset: 1000; }
+      }
+
+      .data-stream {
+        height: 250px;
+        border-top: 1px solid var(--line-color);
+        padding: 20px 30px;
+        font-size: 0.7rem;
+        color: var(--text-dark);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .data-stream::before {
+        content: "LIVE STREAM";
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: var(--neon-red);
+        font-size: 0.6rem;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
+      .code-line {
+        margin-bottom: 4px;
+        white-space: nowrap;
+      }
+      .cl-highlight {
+        color: var(--text-muted);
+      }
+      .cl-warn {
+        color: var(--neon-red);
+      }
+
+      .crosshair {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+        z-index: 100;
+      }
+      .crosshair::before,
+      .crosshair::after {
+        content: "";
+        position: absolute;
+        background: var(--text-muted);
+      }
+      .crosshair::before {
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+      }
+      .crosshair::after {
+        left: 50%;
+        top: 0;
+        height: 100%;
+        width: 1px;
+      }
+
+      .ch-1 {
+        top: 20px;
+        left: 320px;
+      }
+      .ch-2 {
+        bottom: 20px;
+        right: 400px;
+      }
+
+      @media (max-width: 768px) {
+        .system-wrapper {
+          grid-template-columns: 1fr;
+          height: 100vh;
+          overflow-y: auto;
+        }
+        .panel-left, .panel-right {
+          display: none !important;
+        }
+        .panel-center {
+          height: auto;
+          overflow: visible;
+        }
+        .feed-container {
+          overflow-y: visible;
+          padding: 20px;
+        }
+        body {
+          overflow: auto;
+        }
+        body::after {
+          position: fixed;
+        }
+        #matrix-rain, #particles { display: none; }
+        .ch-1, .ch-2 {
+          display: none;
+        }
+      }
+
+      /* ===== Canvas Styles ===== */
+      #matrix-rain {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.15;
+      }
+      #particles {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.3;
+      }
+
+      /* ===== Neon Glow Keyframes ===== */
+      @keyframes neon-border-pulse {
+        0%, 100% { border-color: var(--line-color); box-shadow: none; }
+        50% { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0,240,255,0.3), inset 0 0 15px rgba(0,240,255,0.05); }
+      }
+      @keyframes neon-text-pulse {
+        0%, 100% { text-shadow: none; }
+        50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+      }
+      @keyframes btn-glow-pulse {
+        0%, 100% { box-shadow: none; }
+        50% { box-shadow: 0 0 8px var(--neon-red-dim); }
+      }
+
+      /* ===== Typing Animation ===== */
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+      @keyframes blink-caret {
+        50% { border-color: transparent; }
+      }
+
+      /* ===== Page Load Animations ===== */
+      .panel-left { animation: slide-in-left 0.8s ease-out forwards; }
+      .panel-center { animation: fade-in-up 1s ease-out 0.2s both; }
+      .panel-right { animation: slide-in-right 0.8s ease-out 0.4s both; }
+
+      @keyframes slide-in-left {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes slide-in-right {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      /* ===== Reduced Motion ===== */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        #matrix-rain, #particles { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix-rain"></canvas>
+    <canvas id="particles"></canvas>
+    <div class="crosshair ch-1"></div>
+    <div class="crosshair ch-2"></div>
+
+    <div class="system-wrapper">
+      <aside class="panel panel-left">
+        <div class="brand-header">
+          <img src="https://avatars.githubusercontent.com/u/229789701?v=4" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--neon-red); margin-bottom: 10px;" alt="avatar">
+          <h1 class="glitch-text" data-text="M-TEK">M-TEK</h1>
+          <div class="sub-brand">PERSONAL ARCHIVE // Meredithelin</div>
+        </div>
+
+        <div class="status-row" style="margin-top: 20px">
+          <span>SYS_VER</span>
+          <span class="status-value">v.4.0.9_CYBER</span>
+        </div>
+        <div class="status-row">
+          <span>ENCRYPTION</span>
+          <span style="color: var(--neon-red)">AES-256 (FRAGILE)</span>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item active" onclick="window.location.href='index.html'">
+            <span class="nav-num">01.</span>
+            <span class="nav-label">NEURAL_LOGS</span>
+          </li>
+          <li class="nav-item" onclick="window.location.href='tag.html'">
+            <span class="nav-num">02.</span>
+            <span class="nav-label">SCHEMATICS</span>
+          </li>
+          <li class="nav-item" onclick="window.location.href='rss.xml'">
+            <span class="nav-num">03.</span>
+            <span class="nav-label">UPLINK_COMM</span>
+          </li>
+          <li class="nav-item" onclick="modeSwitch()">
+            <span class="nav-num">04.</span>
+            <span class="nav-label">THEME_TOGGLE</span>
+          </li>
+        </ul>
+
+        <div class="sys-status">
+          <div class="status-row">
+            <span>POST_COUNT</span><span class="status-value" id="sys-post-count">0</span>
+          </div>
+          <div class="status-row">
+            <span>UPTIME</span><span class="status-value" id="sys-uptime">0 DAYS</span>
+          </div>
+          <div class="status-row">
+            <span>NET_LINK</span><span style="color: var(--neon-red)">UNSTABLE</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="panel panel-center">
+        <div class="feed-container">
+          <div class="feed-header">
+            <div class="feed-title">DECRYPTED_LOGS</div>
+            <div class="feed-meta" id="sync-time">LAST SYNC: T-MINUS 00:00:00</div>
+          </div>
+
+          <div id="post-feed">
+            <!-- Data packets will be injected here dynamically -->
+          </div>
+
+          <div style="text-align: center; color: var(--text-dark); margin-top: 50px; font-size: 0.8rem;">
+            [ END OF ARCHIVE_BUFFER ]
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel panel-right">
+        <div class="telemetry-header">
+          <span class="telemetry-title">TARGETING_ARRAY</span>
+          <span style="color: var(--text-muted)">MOD_X9</span>
+        </div>
+
+        <div class="schematic-display">
+          <svg
+            class="schematic-svg"
+            viewBox="0 0 200 200"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--neon-cyan)" stop-opacity="0.5"></stop>
+                <stop offset="100%" stop-color="var(--bg-void)" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+
+            <circle cx="100" cy="100" r="40" fill="url(#glow)" class="pulse-op"></circle>
+            <circle cx="100" cy="100" r="90" fill="none" stroke="var(--neon-purple)" stroke-width="1" class="dash-move spin-slow"></circle>
+
+            <g class="spin-reverse">
+              <circle cx="100" cy="100" r="70" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="10 5 2 5"></circle>
+              <circle cx="100" cy="100" r="65" fill="none" stroke="var(--line-color)" stroke-width="8" stroke-dasharray="1 10"></circle>
+            </g>
+
+            <polygon points="100,20 120,80 180,100 120,120 100,180 80,120 20,100 80,80" fill="none" stroke="var(--neon-red)" stroke-width="1" class="pulse-op"></polygon>
+            <circle cx="100" cy="100" r="25" fill="none" stroke="var(--text-main)" stroke-width="1.5"></circle>
+            <circle cx="100" cy="100" r="15" fill="none" stroke="var(--neon-cyan)" stroke-width="2"></circle>
+
+            <line x1="100" y1="0" x2="100" y2="200" stroke="var(--line-color)" stroke-width="0.5"></line>
+            <line x1="0" y1="100" x2="200" y2="100" stroke="var(--line-color)" stroke-width="0.5"></line>
+            <rect x="98" y="5" width="4" height="10" fill="var(--neon-red)"></rect>
+            <rect x="98" y="185" width="4" height="10" fill="var(--neon-red)"></rect>
+            <rect x="5" y="98" width="10" height="4" fill="var(--neon-red)"></rect>
+            <rect x="185" y="98" width="10" height="4" fill="var(--neon-red)"></rect>
+          </svg>
+        </div>
+
+        <div class="data-stream">
+          <div class="code-line">
+            INITIALIZING ROOT PROTOCOL... <span class="cl-highlight">OK</span>
+          </div>
+          <div class="code-line">
+            LOADING KERNEL EXTENSIONS... <span class="cl-highlight">OK</span>
+          </div>
+          <div class="code-line cl-warn">
+            WARN: UNSIGNED DRIVER DETECTED (OPTICS_V2)
+          </div>
+          <div class="code-line">BYPASSING SECURITY LAYER...</div>
+          <div class="code-line">
+            0x8F9A2B11 <span class="cl-highlight">--ALLOC_MEM</span>
+          </div>
+        </div>
+      </aside>
     </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-02-14</span>
-    </div>
-</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/HTML-shi-yong-jiao-cheng.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">HTML使用教程</span>
-    </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-01-25</span>
-    </div>
-</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/bei-jing-you-wan-gong-lve.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">北京游玩攻略</span>
-    </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-01-07</span>
-    </div>
-</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/HITSZ-qi-mo-kao-ti.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">HITSZ期末考题</span>
-    </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-01-05</span>
-    </div>
-</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/Markdown%20-shi-yong-jiao-cheng.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">Markdown 使用教程</span>
-    </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-01-04</span>
-    </div>
-</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/My%20first%20time%20to%20write%20a%20blog.html">
-    <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
-        </svg>
-        <span class="listTitle">My first time to write a blog</span>
-    </div>
-    <div class="listLabels">
-        
-        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
-        <span class="Label LabelTime" style="background-color:#1f883d">2026-01-03</span>
-    </div>
-</a>
-</nav>
-</div>
-    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Meredithelin.github.io">Meredithelin的个人小站</a></div>
-<div id="footer2">
-    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
-</div>
 
-<script>
-var now=new Date();
-document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+    <script>
+      // Sync Time Logic
+      function updateSyncTime() {
+        const syncEl = document.getElementById('sync-time');
+        if(!syncEl) return;
+        const now = new Date();
+        const pad = (n) => n.toString().padStart(2, '0');
+        syncEl.textContent = `LAST SYNC: T-MINUS ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      }
+      setInterval(updateSyncTime, 1000);
+      updateSyncTime();
 
-if(""!=""){
-    var startSite=new Date("");
-    var diff=now.getTime()-startSite.getTime();
-    var diffDay=Math.floor(diff/(1000*60*60*24));
-    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
-}
-</script></div>
-</body>
-<script>
-var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z', 'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z', 'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z', 'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z'};
-var utterancesLoad=0;
+      // Data Stream Logic
+      const streamContainer = document.querySelector(".data-stream");
+      const lines = [
+        "CALIBRATING SENSORS...",
+        "0x00FF88AA --NULL_PTR",
+        "SYNCING NEURAL LINK...",
+        "PACKET LOSS DETECTED",
+        "ADJUSTING TRAJECTORY VECTORS",
+        "ENGAGING MAIN DRIVE",
+        "<span class='cl-warn'>SYSTEM OVERRIDE AUTHORIZED</span>",
+        "STABILIZING MAGNETIC FIELD...",
+        "OUTPUT CAPACITY: <span class='cl-highlight'>104%</span>",
+        "REROUTING POWER TO THRUSTER MANIFOLD..."
+      ];
 
-let themeSettings={
-    "dark": ["dark","moon","#00f0ff","dark-blue"],
-    "light": ["light","sun","#ff5000","github-light"],
-    "auto": ["auto","sync","","preferred-color-scheme"]
-};
-function changeTheme(mode, icon, color, utheme){
-    document.documentElement.setAttribute("data-color-mode",mode);
-    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
-    document.getElementById("themeSwitch").parentNode.style.color=color;
-    if(utterancesLoad==1){utterancesTheme(utheme);}
-}
-function modeSwitch(){
-    let currentMode=document.documentElement.getAttribute('data-color-mode');
-    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
-    localStorage.setItem("meek_theme", newMode);
-    if(themeSettings[newMode]){
-        changeTheme(...themeSettings[newMode]);
-    }
-}
-function utterancesTheme(theme){
-    const message={type:'set-theme',theme: theme};
-    const iframe=document.getElementsByClassName('utterances-frame')[0];
-    iframe.contentWindow.postMessage(message,'https://utteranc.es');
-}
-if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
-</script>
+      setInterval(() => {
+        if (!streamContainer) return;
+        const newLine = document.createElement("div");
+        newLine.className = "code-line";
+        newLine.innerHTML = lines[Math.floor(Math.random() * lines.length)];
+        streamContainer.appendChild(newLine);
+        if (streamContainer.children.length > 12) {
+          streamContainer.removeChild(streamContainer.children[1]);
+        }
+      }, 1200);
 
-<script>
-document.getElementById("pathSearch").setAttribute("d",IconList["search"]);
-document.getElementById("pathRSS").setAttribute("d",IconList["rss"]);
-iconTOP=document.getElementsByClassName("svgTop1");
-iconPost=document.getElementsByClassName("svgTop0");
-for(var i=0;i<iconTOP.length;i++){
-    iconTOP[i].setAttribute("d",IconList["upload"]);
-    iconTOP[i].parentNode.style.color="red";
-}
-for(var i=0;i<iconPost.length;i++){
-    iconPost[i].setAttribute("d",IconList["post"]);
-}
+      // Fetch and Render Posts
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('postList.json')
+          .then(res => res.json())
+          .then(data => {
+            const feedContainer = document.getElementById('post-feed');
+            
+            // extract posts excluding labelColorDict
+            const posts = [];
+            for(const [key, val] of Object.entries(data)) {
+              if(key !== 'labelColorDict') {
+                posts.push({ id: key, ...val });
+              }
+            }
+            
+            // sort by date descending
+            posts.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+            
+            // Update stats
+            const countEl = document.getElementById('sys-post-count');
+            if(countEl) countEl.textContent = posts.length;
+            
+            posts.forEach(post => {
+              const article = document.createElement('article');
+              article.className = 'data-packet';
+              
+              const labelsHtml = post.labels.map(l => `<span class="tag">${l}</span>`).join('');
+              
+              article.innerHTML = `
+                <div class="packet-header">
+                  <span class="packet-id">LOG_ID: #${post.id}</span>
+                  <span>DATE: ${post.createdDate}</span>
+                </div>
+                <div class="packet-body">
+                  <h2 class="packet-title">${post.postTitle}</h2>
+                  <p class="packet-excerpt">ACCESSING DECRYPTED DATA REPOSITORY...</p>
+                </div>
+                <div class="packet-footer">
+                  ${labelsHtml}
+                  <button class="btn-read" onclick="window.location.href='${post.postUrl}'">ACCESS DATA</button>
+                </div>
+              `;
+              feedContainer.appendChild(article);
+            });
+            
+            // update uptime
+            const uptimeEl = document.getElementById('sys-uptime');
+            if(uptimeEl && posts.length > 0) {
+              const oldest = posts[posts.length - 1];
+              const startSite = new Date(oldest.createdDate);
+              const diff = new Date().getTime() - startSite.getTime();
+              const diffDay = Math.max(0, Math.floor(diff/(1000*60*60*24)));
+              uptimeEl.textContent = diffDay + " DAYS";
+            }
+          })
+          .catch(err => {
+            console.error("Error loading posts:", err);
+            const feedContainer = document.getElementById('post-feed');
+            if(feedContainer) feedContainer.innerHTML = '<div style="color: var(--neon-red); padding: 20px;">[ERR] FAILED TO DECRYPT ARCHIVE PACKETS</div>';
+          });
+      });
+    </script>
 
+    <script>
+      // Matrix Rain
+      (function() {
+        const canvas = document.getElementById('matrix-rain');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w, h, cols, drops;
+        const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+        function resize() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+          cols = Math.floor(w / 18);
+          drops = Array(cols).fill(1);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        function draw() {
+          ctx.fillStyle = 'rgba(3, 3, 4, 0.05)';
+          ctx.fillRect(0, 0, w, h);
+          ctx.fillStyle = '#00f0ff';
+          ctx.font = '14px "Share Tech Mono", monospace';
+          for (let i = 0; i < cols; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(char, i * 18, drops[i] * 18);
+            if (drops[i] * 18 > h && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
 
-
-
-</script>
-
-
+      // Particle Network
+      (function() {
+        const canvas = document.getElementById('particles');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        const particles = [];
+        const maxParticles = 60;
+        const connectionDist = 150;
+        function resize() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        for (let i = 0; i < maxParticles; i++) {
+          particles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 2 + 1
+          });
+        }
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(138, 43, 226, 0.6)';
+            ctx.fill();
+            for (let j = i + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dx = p.x - p2.x, dy = p.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < connectionDist) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `rgba(138, 43, 226, ${0.3 * (1 - dist / connectionDist)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
 </html>
