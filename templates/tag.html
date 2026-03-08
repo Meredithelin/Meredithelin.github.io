@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<meta name="description" content="{{ blogBase['title'] }} search page">
+<title>{{ blogBase['title'] }} - Tag</title>
+{% endblock %}
+
+{% block style %}
+<style>
+.tagTitle {
+    margin: auto 0;
+    font-size: 40px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--font-display);
+    color: var(--neon-red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    animation: neon-text-pulse 4s ease-in-out infinite;
+}
+.title-right { display: flex; margin: auto 0 0 auto; }
+.title-right .circle { padding: 14px 16px; margin-right: 8px; }
+.btn {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--line-color);
+    cursor: pointer;
+    font-family: var(--font-data);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px rgba(0,240,255,0.1);
+    transform: scale(1.05);
+}
+.btn-invisible { border: none; background: transparent; }
+.btn-invisible:hover { background: rgba(255,255,255,0.05); }
+.subnav-search { width: 222px; margin-top: 8px; margin-right: 8px; }
+.subnav-search-input {
+    width: 160px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-color);
+    color: var(--text-main);
+    font-family: var(--font-data);
+    padding: 4px 8px;
+}
+.subnav-search-input:focus {
+    border-color: var(--neon-cyan);
+    outline: none;
+    box-shadow: 0 0 8px rgba(0,240,255,0.3);
+}
+.subnav-search button {
+    padding: 5px 8px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.SideNav-icon { margin-right: 16px; }
+.SideNav {
+    border-color: var(--line-color) !important;
+}
+.SideNav-item {
+    color: var(--text-main) !important;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.SideNav-item:hover {
+    background: var(--neon-red-dim);
+    border-left: 3px solid var(--neon-red);
+    transform: translateX(4px);
+}
+.Label {
+    color: #fff;
+    margin-left: 4px;
+    font-family: var(--font-data);
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.Label:hover {
+    box-shadow: 0 0 12px currentColor;
+    transform: scale(1.1);
+}
+#taglabel .Label { margin-bottom: 8px; }
+.Counter {
+    color: #fff;
+    background-color: rgba(255,255,255,0.2);
+    font-family: var(--font-data);
+}
+.genTime { float: right; }
+.d-flex { min-width: 0; }
+.listTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: var(--text-main);
+}
+.listLabels { white-space: nowrap; }
+.notFind {
+    color: var(--neon-red);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+}
+.border { border: 1px solid var(--line-color) !important; }
+@media (max-width: 600px) {
+    .tagTitle { display: none; }
+    .LabelTime { display: none; }
+}
+</style>
+{% endblock %}
+
+{% block header %}
+<span class="tagTitle"><span>Loading</span><span class="AnimatedEllipsis"></span></span>
+<div class="title-right">
+    <div class="subnav-search">
+        <input type="search" class="form-control subnav-search-input float-left" aria-label="Search site" value="" style="height:32px;">
+        <button class="btn float-left" type="submit" onclick="javascript:searchShow()">{{ blogBase['i18n']['Search'] }}</button>
+        <svg class="subnav-search-icon octicon octicon-search" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path id="searchSVG" fill-rule="evenodd"></path>
+        </svg>
+    </div>
+    <a href="{{ blogBase['homeUrl'] }}" id="buttonHome" class="btn btn-invisible circle" title="{{ blogBase['i18n']['home'] }}">
+        <svg class="octicon" width="16" height="16"><path id="pathHome" fill-rule="evenodd"></path></svg>
+    </a>
+    {% if blogBase['themeMode']=='manual' %}
+    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="{{ blogBase['i18n']['switchTheme'] }}">
+        <svg class="octicon" width="16" height="16"><path id="themeSwitch" fill-rule="evenodd"></path></svg>
+    </a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="taglabel" style="margin-bottom:8px;"></div>
+<nav class="SideNav"></nav>
+<div class="notFind" style="display:none;font-size:24px;margin:8px;">Not Find</div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("searchSVG").setAttribute("d",IconList["search"]);
+
+tagList=[];
+labelsCount={};
+jsonData='';
+let requestJson="postList.json"
+let request=new XMLHttpRequest();
+request.open("GET",requestJson);
+request.responseType='text';
+request.send();
+request.onload=function(){
+    jsonData=JSON.parse(request.response);
+    console.log(jsonData);
+    showList(labelsCount);
+    setClassDisplay(decodeURI(window.location.hash.slice(1)));
+}
+
+function showList(labelsCount){
+    let SideNav=document.getElementsByClassName("SideNav")[0];
+    SideNav.classList.add("border");
+    let taglabel=document.getElementById("taglabel");
+
+    jsonData['labelColorDict']["All"]="#000";
+    labelsCount["All"]=0;
+    for (let key in jsonData) {
+        if (key !== 'labelColorDict' && Array.isArray(jsonData[key]['labels'])) {
+            labelsCount["All"]++;
+            for (let label of jsonData[key]['labels']) {
+                labelsCount[label] = (labelsCount[label] || 0) + 1;
+            }
+        }
+    }
+
+    let sortedLabelsList = Object.keys(labelsCount).sort((a, b) => labelsCount[b] - labelsCount[a]);
+    for (let label of sortedLabelsList) {
+        tagList.push(label);
+        let showLabels = document.createElement("button");
+        showLabels.setAttribute("class", "Label");
+        showLabels.setAttribute("style", "background-color:" + jsonData['labelColorDict'][label]+";padding:4px;");
+        showLabels.innerHTML="&nbsp;&nbsp;"+label+" ";
+        showLabels.setAttribute("onclick", "javascript:updateShowTag('" + label + "');");
+
+        let LabelNum=document.createElement("span");
+        LabelNum.setAttribute("class","Counter");
+        LabelNum.innerHTML=labelsCount[label];
+        showLabels.appendChild(LabelNum);
+        taglabel.appendChild(showLabels);
+    }
+
+    for(i in jsonData){
+        if(i!='labelColorDict'){
+            let div=document.createElement("div");
+            div.setAttribute("class","lists "+jsonData[i]['labels'].join(" "));
+            let item=document.createElement("a");
+            item.setAttribute("class","SideNav-item d-flex flex-items-center flex-justify-between");
+            item.setAttribute("href",jsonData[i]['postUrl']);
+
+            let center=document.createElement("div");
+            center.setAttribute("class","d-flex flex-items-center");
+
+            svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+            path=document.createElementNS("http://www.w3.org/2000/svg","path"); 
+            span=document.createElement("span");
+            svg.setAttributeNS(null,"class","SideNav-icon octicon");
+            svg.setAttributeNS(null,"style","width:16px;height:16px");
+            path.setAttributeNS(null, "d", IconList["post"]);
+            svg.appendChild(path);
+
+            let title=document.createElement("span");
+            title.setAttribute("class","listTitle");
+            title.innerHTML=jsonData[i]['postTitle'];
+            center.appendChild(svg);
+            center.appendChild(title);
+
+            let listLabels=document.createElement("div");
+            listLabels.setAttribute("class","listLabels");
+            
+            for(label of jsonData[i]['labels']){
+                let LabelName=document.createElement("span");
+                LabelName.setAttribute("class","Label LabelName");
+                LabelName.setAttribute("style","background-color:"+jsonData['labelColorDict'][label]);
+                LabelName.innerHTML=label;
+                listLabels.appendChild(LabelName);
+            }
+            let LabelTime=document.createElement("span");
+            LabelTime.setAttribute("class","Label LabelTime");
+            LabelTime.setAttribute("style","background-color:"+jsonData[i]['dateLabelColor']);
+            LabelTime.innerHTML=jsonData[i]['createdDate'];
+            listLabels.appendChild(LabelTime);
+
+            item.appendChild(center);
+            item.appendChild(listLabels);
+            div.appendChild(item);
+            SideNav.appendChild(div);
+        }
+    }
+}
+
+function updateShowTag(label){
+    if(window.location.hash.slice(1)!=encodeURI(label)){
+        window.location.hash="#"+(label);
+        setClassDisplay(label);
+    }
+}
+
+function setClassDisplay(label){
+    let lists = document.getElementsByClassName("lists");
+    let tagTitle = document.getElementsByClassName("tagTitle")[0];
+    tagTitle.innerHTML="Tag #"+label;
+    document.title=label+" - {{ blogBase['title'] }}";
+    document.getElementsByClassName("subnav-search-input")[0].value='';
+    if(label=="All"){
+        for(let i = 0; i < lists.length; i++){lists[i].style.display='block';}
+        document.getElementsByClassName("notFind")[0].style.display='none';
+    }
+    else if(tagList.indexOf(label)!=-1){
+        for(let i = 0; i < lists.length; i++){
+            lists[i].style.display='none';
+        }
+
+        let labels = document.getElementsByClassName(label);
+        for(let i = 0; i < labels.length; i++){
+            labels[i].style.display='block';
+        }
+        document.getElementsByClassName("notFind")[0].style.display='none';
+    }
+    else{
+        document.getElementsByClassName("subnav-search-input")[0].value=label;
+        searchShow();
+    }
+}
+
+function searchShow(){
+    let lists = document.getElementsByClassName("lists");
+    let tagTitle = document.getElementsByClassName("tagTitle")[0];
+    let searchInput = document.getElementsByClassName("subnav-search-input")[0].value;
+    tagTitle.innerHTML="Search #"+searchInput;
+    if(searchInput==''){document.title="Search - {{ blogBase['title'] }}";}
+    else{document.title=searchInput+" - {{ blogBase['title'] }}";}
+    let a=0;
+    window.location.hash="#"+(searchInput);
+    for(let i = 0; i < lists.length; i++){
+        if(lists[i].childNodes[0].childNodes[0].childNodes[1].innerHTML.toUpperCase().indexOf(searchInput.toUpperCase())==-1){lists[i].style.display='none';}
+        else{lists[i].style.display='block';a=a+1;}
+    }
+    if(a==0){
+        let notFind=document.getElementsByClassName("notFind")[0];
+        notFind.style.display='block';
+        notFind.innerHTML='Not Find "'+searchInput+'"';
+    }
+    else{document.getElementsByClassName("notFind")[0].style.display='none';}
+}
+</script>
+{% endblock %}

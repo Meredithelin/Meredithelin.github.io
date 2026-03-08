@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="{{ blogBase['nightTheme'] }}" data-light-theme="{{ blogBase['dayTheme'] }}" lang={% if blogBase['i18n']=='CN' %}"zh-CN"{% elif blogBase['i18n']=='RU' %}"ru"{% else -%}"en"{%- endif -%}>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    {{ blogBase['allHead'] }}
+    <link rel="icon" href="{{ blogBase['faviconUrl'] }}">
+    {%- if blogBase['themeMode']=='manual' -%}
+    <script>
+        let theme = localStorage.getItem("meek_theme") || "dark";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+    {%- endif -%}
+    {% block head %}{% endblock %}
+</head>
+<style>
+:root {
+    --bg-void: #030304; --bg-panel: #0a0a0c;
+    --neon-red: #ff003c; --neon-red-dim: rgba(255,0,60,0.2);
+    --neon-purple: #8a2be2; --neon-purple-dim: rgba(138,43,226,0.2);
+    --neon-cyan: #00f0ff;
+    --text-main: #ffffff; --text-muted: #888899; --text-dark: #333344;
+    --line-color: rgba(255,255,255,0.15);
+    --font-display: "Orbitron", sans-serif;
+    --font-data: "Share Tech Mono", monospace;
+}
+html[data-color-mode="light"] {
+    --bg-void: #eaeaee; --bg-panel: #ffffff;
+    --neon-red: #d32f2f; --neon-purple: #512da8; --neon-cyan: #00838f;
+    --text-main: #111122; --text-muted: #555566; --text-dark: #888899;
+    --line-color: rgba(0,0,0,0.15);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background: var(--bg-void);
+    color: var(--text-main);
+    font-family: var(--font-data);
+    font-size: 16px;
+    line-height: 1.25;
+    min-width: 200px;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 45px;
+    position: relative;
+}
+body::before {
+    content: "";
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 8px;
+    background: linear-gradient(transparent, rgba(0,240,255,0.08), transparent);
+    z-index: 9998; pointer-events: none;
+    animation: scanline-move 6s linear infinite;
+}
+body::after {
+    content: "";
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none; z-index: 9999;
+}
+#header {
+    display: flex;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--neon-red-dim);
+    margin-bottom: 16px;
+}
+#footer {
+    margin-top: 64px;
+    text-align: center;
+    font-size: small;
+    color: var(--text-muted);
+}
+#footer a { color: var(--neon-cyan); text-decoration: none; }
+#footer a:hover { text-decoration: underline; }
+svg { fill: currentColor; }
+.AnimatedEllipsis::after { content: '...'; animation: ellipsis 1.5s infinite; }
+@keyframes ellipsis { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+
+/* ===== Animated CRT Scanline ===== */
+@keyframes scanline-move {
+    0% { top: -10px; }
+    100% { top: 100vh; }
+}
+
+/* ===== Neon Glow Keyframes ===== */
+@keyframes neon-text-pulse {
+    0%, 100% { text-shadow: none; }
+    50% { text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+}
+
+/* ===== Page Load Animations ===== */
+#header { animation: fade-in-down 0.6s ease-out both; }
+#content { animation: fade-in-up 0.8s ease-out 0.2s both; }
+#footer { animation: fade-in-up 0.8s ease-out 0.4s both; }
+
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+@media (max-width: 600px) {
+    body { padding: 8px; }
+}
+</style>
+{% block style %}{% endblock %}
+
+<body>
+    <div id="header">{% block header %}{% endblock %}</div>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">{% include 'footer.html' %}</div>
+</body>
+<script>
+var IconList={{ IconList }};
+var utterancesLoad=0;
+{% if blogBase['themeMode']=='manual' %}
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+{%- endif %}
+console.log("\n %c Gmeek {{ blogBase['GMEEK_VERSION'] }} https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+{% block script %}{% endblock %}
+</html>
