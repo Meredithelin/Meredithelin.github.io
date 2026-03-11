@@ -1,5 +1,96 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Sat, 14 Feb 2026 09:00:49 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>飞机大战</title><link>https://Meredithelin.github.io/post/fei-ji-da-zhan.html</link><description>https://flywar.netlify.app/。</description><guid isPermaLink="true">https://Meredithelin.github.io/post/fei-ji-da-zhan.html</guid><pubDate>Sat, 14 Feb 2026 09:00:19 +0000</pubDate></item><item><title>HTML使用教程</title><link>https://Meredithelin.github.io/post/HTML-shi-yong-jiao-cheng.html</link><description># HyperText Markup Language
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Meredithelin的个人小站</title><link>https://Meredithelin.github.io</link><description>我是Meredithelin,分享好玩事情的博主</description><copyright>Meredithelin的个人小站</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/229789701?v=4</url><title>avatar</title><link>https://Meredithelin.github.io</link></image><lastBuildDate>Wed, 11 Mar 2026 05:15:19 +0000</lastBuildDate><managingEditor>Meredithelin的个人小站</managingEditor><ttl>60</ttl><webMaster>Meredithelin的个人小站</webMaster><item><title>Git教程</title><link>https://Meredithelin.github.io/post/Git-jiao-cheng.html</link><description># 1.常用命令
+## 1.1 克隆仓库
+
+```bash
+git clone &lt;repository_url&gt;
+```
+
+## 1.2 查看状态
+
+```bash
+git status
+```
+## 1.3 添加文件到暂存区
+
+```bash
+git add &lt;file_name&gt;
+```
+## 1.4 提交更改
+
+```bash
+git commit -m 'commit message'
+```
+## 1.5 推送到远程仓库
+
+```bash
+git push origin &lt;branch_name&gt;
+```
+## 1.6 拉取远程仓库的更改
+
+```bash
+git pull origin &lt;branch_name&gt;
+```
+## 1.7 创建分支
+
+```bash
+git branch &lt;branch_name&gt;
+```
+## 1.8 切换分支
+
+```bash
+git checkout &lt;branch_name&gt;
+```
+## 1.9 合并分支
+
+```bash
+git merge &lt;branch_name&gt;
+```
+## 1.10 查看提交历史
+
+```bash
+git log
+```
+## 1.11 删除分支
+
+```bash
+git branch -d &lt;branch_name&gt;
+```
+## 1.12 查看远程仓库
+
+```bash
+git remote -v
+```
+## 1.13 添加远程仓库
+
+```bash
+git remote add &lt;remote_name&gt; &lt;repository_url&gt;
+```
+## 1.14 删除远程仓库
+
+```bash
+git remote remove &lt;remote_name&gt;
+```
+## 1.15 查看分支
+
+```bash
+git branch
+```
+## 1.16 查看远程分支
+
+```bash
+git branch -r
+```
+## 1.17 查看所有分支
+
+```bash
+git branch -a
+```
+## 1.18 重命名分支
+
+```bash
+git branch -m &lt;old_branch_name&gt; &lt;new_branch_name&gt;
+```。</description><guid isPermaLink="true">https://Meredithelin.github.io/post/Git-jiao-cheng.html</guid><pubDate>Wed, 11 Mar 2026 05:14:47 +0000</pubDate></item><item><title>飞机大战</title><link>https://Meredithelin.github.io/post/fei-ji-da-zhan.html</link><description>https://flywar.netlify.app/。</description><guid isPermaLink="true">https://Meredithelin.github.io/post/fei-ji-da-zhan.html</guid><pubDate>Sat, 14 Feb 2026 09:00:19 +0000</pubDate></item><item><title>HTML使用教程</title><link>https://Meredithelin.github.io/post/HTML-shi-yong-jiao-cheng.html</link><description># HyperText Markup Language
 # 1.常见标签
 ## 区块元素
 - `&lt;h1&gt;`
